@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Checklist title</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="uncheckItems()"><ion-icon name="refresh-circle"></ion-icon></button>
+        <button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon> </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list no-lines>
+        <ion-item-sliding>
+            <ion-item>
+              <ion-label>Item title</ion-label>
+              <ion-checkbox [checked]="item.checked" (click)="toggleItem(item)"></ion-checkbox>
+            </ion-item>
+
+            <ion-item-options>
+                <button ion-button icon-only color="light" (click)="renameItem(item)"><ion-icon name="clipboard"></ion-icon>Editar</button>
+                <button ion-button icon-only color="danger" (click)="removeItem(item)"><ion-icon name="tash"></ion-icon>Deletar</button>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+</ion-content>
+<!--
+Você também sabe como os itens deslizantes funcionam agora, mas desta vez temos um <ion-checkbox> como o principal
+Item em vez do título da lista de verificação e quando ele é clicado ele irá acionar a função toggleItem ()
+Que precisaremos definir mais tarde. Observe que estamos usando apenas um <íon-item> simples em vez de
+<Button ion-item>, isso é porque estamos anexando o manipulador de clique diretamente à caixa de seleção
+Do que tê-lo em todo o item.
+Há também um pouco de nova sintaxe aqui, vamos dar uma olhada:
+
+[Checked] = "item.checked"
+Quando algo está rodeado por [colchetes] isso significa que vamos modificar uma propriedade em
+Esse elemento, e vamos defini-lo para a expressão contida nas aspas, e não uma string. Então neste
+Caso ele iria definir a propriedade checked para o valor de item.checked. Agora não criamos um
+Referência ao item para que ele não vai funcionar de qualquer maneira, mas mais tarde ele vai. A coisa importante a lembrar aqui é que o
+Colchetes irá avaliar o que está dentro das aspas. Vamos imaginar que você tem o seguinte
+Definido na classe para o seu componente:
+
+-->
