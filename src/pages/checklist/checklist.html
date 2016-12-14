@@ -40,6 +40,10 @@ Esse elemento, e vamos defini-lo para a expressão contida nas aspas, e não uma
 Caso ele iria definir a propriedade checked para o valor de item.checked. Agora não criamos um
 Referência ao item para que ele não vai funcionar de qualquer maneira, mas mais tarde ele vai. A coisa importante a lembrar aqui é que o
 Colchetes irá avaliar o que está dentro das aspas. Vamos imaginar que você tem o seguinte
-Definido na classe para o seu componente:
+Definido na classe para o seu componente: This.myName = "Josh" Se eu fosse usar o seguinte código:
+<qualque coisa myName = "myName"> o atributo myName seria definido literalmente como "myName", mas se eu fosse usar este código em vez disso: 
+<qualque coisa [myName] = "myName"> A propriedade myName seria definida como "Josh", porque o meu nome iria ficar avaliada em primeiro lugar neste caso. 
+Continuando, não há nada de mais surpreendente no resto do modelo - simplesmente adicionamos os botões "Editar" e "Excluir" à nossa lista deslizante 
+como fizemos na última página. Se você executar ionic servir agora, você deve ver algo como isto:
 
 -->
