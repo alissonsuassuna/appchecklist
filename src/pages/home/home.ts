@@ -85,11 +85,18 @@ export class HomePage {
   }
 
   viewChecklist(checklist): void {
-
+    this.nav.push(ChecklistPage, {
+      checklist: checklist
+    });
   }
 
   removeChecklist(checklist): void {
+    let index = this.checklists.indexOf(checklist);
 
+    if(index > -1){
+      this.checklists.splice(index, 1);
+      this.save();
+    }
   }
 
   save(): void {
@@ -142,11 +149,49 @@ Para quando o botão adicionar é clicado:
 ----------------------------
 Função renameChecklist
 
-A primeira coisa que você pode notar é que parece muito semelhante à nossa função addChecklist, e isso é porque é. Usamos o mesmo prompt com as mesmas entradas e botões, apenas temos um manipulador ligeiramente diferente.
+A primeira coisa que você pode notar é que parece muito semelhante à nossa função 
+addChecklist, e isso é porque é. Usamos o mesmo prompt com as mesmas entradas e 
+botões, apenas temos um manipulador ligeiramente diferente.
 
-Observe que estamos passando um parâmetro para esta função, que será uma referência para a lista de verificação que queremos renomear. Vamos atualizar o modelo em breve para passar nesta referência, mas por agora apenas fingir que temos.
+Observe que estamos passando um parâmetro para esta função, que será uma 
+referência para a lista de verificação que queremos renomear. Vamos atualizar 
+o model em breve para passar nesta referência, mas por agora apenas fingir 
+que temos.
 
-Nós usamos esta referência para a lista de verificação para encontrá-lo em nossa matriz this.checklists e, em seguida, configurá-lo para o novo título que foi inserido, em seguida, acionamos uma salvar.
+Nós usamos esta referência para a lista de verificação para encontrá-lo 
+em nosso array this.checklists e, em seguida, configurá-lo para o novo 
+título que foi inserido, em seguida, acionamos uma salvar.
 
-Novamente, se você se lembrar de antes, já criamos um manipulador de clique que chamará essa função no modelo:
+Novamente, se você se lembrar de antes, já criamos um manipulador de 
+clique que chamará essa função no models:
+
+  <button light (click)="renameChecklist(checklist)"><ion-icon
+    name="clipboard"></ion-icon></button>
+--------------------------------
+função removeChecklist
+
+Esta função é bastante simples porque não requer qualquer entrada do usuário, 
+só precisamos nos livrar da Lista de verificação Assim como fizemos antes, 
+estamos passando em uma  referência à lista de verificação e, em 
+seguida, encontrar a lista de verificação
+no noss array this.checklists. Em seguida, simplesmente removê-lo do
+array usando o método de splice e Disparar um salvamento.
+Aqui está o código do modelo que aciona esta função:
+  <button danger (click)="removeChecklist(checklist)"><ion-icon
+    name="trash"></ion-icon> Delete</button>
+ ---------------------------------
+função viewChecklist
+
+Podemos criar e modificar nossas listas de verificação agora, mas também 
+precisamos ser capazes de ver os detalhes de
+Listas de verificação e para adicionar itens individuais a listas de 
+verificação. Para fazer isso, vamos usar o NavController para
+Pressione uma nova página e passe uma referência à lista de verificação clicada.
+
+
+Passamos na ChecklistPage que importámos antes (que ainda estamos para terminar) 
+ao método push, bem como
+Como os dados que queremos enviar para a nova página, que é uma referência 
+para a lista de verificação que o usuário está tentando
+visualizar. Nós poderemos usar NavParams na classe para nossa página da 
  */
