@@ -55,7 +55,33 @@ export class HomePage {
   }
 
   renameChecklist(checklist): void {
+    let prompt = this.alertCtrl.create({
+      title: 'Renomea Lista',
+      message: 'Digite o novo nome da lista',
+      inputs: [
+        {
+          name: 'name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Salvar',
+          handler: data => {
+            let index = this.checklists.indexOf(checklist);
 
+              if(index > -1){
+                this.checklists[index].setTitle(data.name);
+                this.save();
+              }
+          }
+        }
+      ]
+    });
+
+    prompt.present();
   }
 
   viewChecklist(checklist): void {
@@ -113,4 +139,14 @@ Se você der uma olhada em seu arquivo de modelo novamente, você se lembrará d
 Para quando o botão adicionar é clicado:
 
   <button (click)="addChecklist()"><ion-icon name="add-circle"></ion-icon></button>
+----------------------------
+Função renameChecklist
+
+A primeira coisa que você pode notar é que parece muito semelhante à nossa função addChecklist, e isso é porque é. Usamos o mesmo prompt com as mesmas entradas e botões, apenas temos um manipulador ligeiramente diferente.
+
+Observe que estamos passando um parâmetro para esta função, que será uma referência para a lista de verificação que queremos renomear. Vamos atualizar o modelo em breve para passar nesta referência, mas por agora apenas fingir que temos.
+
+Nós usamos esta referência para a lista de verificação para encontrá-lo em nossa matriz this.checklists e, em seguida, configurá-lo para o novo título que foi inserido, em seguida, acionamos uma salvar.
+
+Novamente, se você se lembrar de antes, já criamos um manipulador de clique que chamará essa função no modelo:
  */
