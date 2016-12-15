@@ -22,21 +22,21 @@ export class HomePage {
 
   }
 
-  addChecklist(){
+ addChecklist(): void {
     let prompt = this.alertCtrl.create({
-      title: 'Nova Lista',
-      message: 'Informe os dados da sua nova lista',
+      title: 'Nova lista',
+      message: 'Digite o nome da nova lista por favor',
       inputs: [
         {
-          name: 'Nome'
+          name: 'name'
         }
       ],
       buttons: [
         {
-          text: 'Cancelar'
+          text: 'Cancel'
         },
         {
-          text: 'Salvar',
+          text: 'Save',
           handler: data => {
             let newChecklist = new ChecklistModel(data.name, []);
             this.checklists.push(newChecklist);

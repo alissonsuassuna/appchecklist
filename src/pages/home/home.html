@@ -1,31 +1,30 @@
 <ion-header>
-  
   <ion-navbar color="secondary">
-      <ion-title>
-          <img src="assets/images/logo.png"/>
-      </ion-title>
-    
-      <ion-buttons end>
-        <button ion-button icon-only (click)="addChecklist()"><ion-icon name="add-circle"></ion-icon> Teste</button>
-      </ion-buttons>
+    <ion-title>
+      <img src = "assets/images/logo.png" />
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addChecklist()"><ion-icon name="add-circle"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
-
   <ion-list no-lines>
 
-      <ion-item-sliding>
-          <button ion-item (click)="viewChecklist(checklist)">TITLE GOES HERE <span> 0 item</span> </button>
+    <ion-item-sliding *ngFor="let checklist of checklists">
 
-          <ion-item-options>
-              <button ion-button icon-only color="light" (click)="renameChecklist(checklist)"><ion-icon name="clipboard"></ion-icon> Editar</button>
-              <button ion-button icon-only color="danger" (click)="removeChecklist(checklist)"><ion-icon name="trash"></ion-icon> Deletar</button>
-          </ion-item-options>
+      <button ion-item (click)="viewChecklist(checklist)" class="home-item">
+          {{checklist.title}}
+          <span class="secondary-detail">{{checklist.items.length}} items</span>
+      </button>
 
-      </ion-item-sliding>
+      <ion-item-options>
+        <button ion-button icon-only color="light" (click)="renameChecklist(checklist)"><ion-icon name="clipboard"></ion-icon></button>
+        <button ion-button icon-only color="danger" (click)="removeChecklist(checklist)"><ion-icon name="trash"></ion-icon></button>
+      </ion-item-options>
+      
+    </ion-item-sliding>
 
   </ion-list>
 </ion-content>
@@ -75,5 +74,11 @@ Conteúdo que queremos exibir quando o usuário desliza o item. Neste caso, esta
 Botões que também passarão em uma referência à lista de verificação em que foi chamado (novamente, teremos que criar
 Esta referência mais tarde, por agora só vai causar problemas).
 Isso é tudo que há para a home page, então vamos passar para a página da lista de verificação agora.
+===============---=======--====--====--=========---====---====---===---==========
+Explicações do ngFor
 
+Estamos fazendo algumas coisas interessantes aqui agora, mais notavelmente, 
+nós adicionamos um loop ngFor:
+
+<ion-item-sliding *ngFor="let checklist of checklists">
 -->
