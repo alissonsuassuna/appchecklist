@@ -19,7 +19,32 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
+    
+    this.platform.ready().then(() => {
+      
+      this.dataService.getData().then((checklists) => {
 
+        let savedChecklists: any = false;
+
+        if(typeof(checklists) != "undefined"){
+          savedChecklists = JSON.parse(checklists);
+        }
+
+        if(savedChecklists){
+
+          savedChecklists.forEach((savedChecklist) => {
+
+            let loadChecklist = new ChecklistModel(savedChecklist.title, savedChecklist.items);
+
+            this.checklists.push(loadChecklist);
+
+            loadChecklist.checklist.subscribe(update => {
+              this.save();
+            });
+          });
+        }
+      });
+    });
   }
 
  addChecklist(): void {
@@ -100,6 +125,9 @@ export class HomePage {
   }
 
   save(): void {
+
+    Keyboard.close();
+    this.dataService.save(this.checklists);
     
   }
 }
@@ -193,4 +221,41 @@ Passamos na ChecklistPage que importámos antes (que ainda estamos para terminar
 ao método push, bem como os dados que queremos enviar para a nova página, que é uma referência 
 para a lista de verificação que o usuário está tentando
 visualizar. Nós poderemos usar NavParams na classe para nossa página da 
+----------------------------------
+
+função save = para salva os dados do app 
+
+Você sabe o que seria realmente irritante? Se você criar uma lista completa cheia de itens para alguma tarefa que você
+Necessidade de concluir, e fecha o app e as taferas sumi. Bem, isso é exatamente o que está acontencendo com o aplicativo
+agora, então vamos precisar adicionar uma maneira de salvar os dados que o usuário adiciona ao aplicativo
+Para uso posterior.
+Já criamos uma grande parte da estrutura para isso, estamos assinando nossos Observables e chamando o
+Salvar a função toda vez que alguns dados mudam, só precisamos implementar essa função agora.
+
+Se você se lembrar, anteriormente já gerado e importado um serviço de dados, então tudo o que precisamos mudar aqui é para
+Adicionar uma chamada para ele e passar os dados de checklists atuais. Naturalmente, não implementamos
+Serviço de dados ainda assim ele não vai fazer nada com os dados, então vamos corrigir isso agora. Observe que também fazemos uma chamada
+Para fechar o Teclado aqui, já que o método save é chamado sempre que qualquer item é atualizado, podemos usá-lo
+Para certificar-se de que o teclado está fechado depois que um usuário é feito adicionando ou editando qualquer dados.
+====================================
+Explicação sobre a função ionViewDidLoad 
+
+Estamos fazendo uma chamada para a função getData que acabamos de definir no nosso serviço de dados. Como eu mencionei, o
+A função getData retorna uma promessa em vez dos dados diretamente, o que nos permite lidar com a resposta
+Aqui uma vez que terminou o carregamento. Se a função getData apenas retornou os dados diretamente, em vez de um
+Promessa, então os dados provavelmente não teriam mesmo sido devolvidos ainda quando tentamos acessá-lo.
+
+Então, esperamos que os dados sejam recuperados e, em seguida, passem os dados das listas de verificação para o nosso manipulador. Primeiro, decodificamos
+A seqüência de caracteres JSON em nosso array que podemos trabalhar com ele, em seguida, loop por cada item do array
+E criar um novo modelo de lista de verificação com base nos seus dados. A razão pela qual percorremos os dados e criamos
+Novos modelos ao invés de apenas confira os existentes this.checklists para ser savedChecklists diretamente é porque
+Por converter as listas de verificação em uma cadeia JSON quando armazená-lo perdemos a capacidade de usar o auxiliar
+Funções que definimos no modelo. Assim, basta usar os dados de título e itens para recriar novos objetos para todos
+As listas de verificação.
+
+Finalmente, configuramos o ouvinte para o Observable de novo para que a função save seja acionada sempre que
+As alterações de dados. É importante que façamos tudo isso dentro da chamada platform.ready (), que só
+Executar depois que o dispositivo estiver pronto. Como estamos interagindo com o armazenamento de dispositivos, se tentarmos fazer isso
+Antes que o dispositivo esteja pronto, causará alguns problemas.
+=====================================
  */
