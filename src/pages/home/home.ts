@@ -33,10 +33,10 @@ export class HomePage {
       ],
       buttons: [
         {
-          text: 'Cancel'
+          text: 'Cancelar'
         },
         {
-          text: 'Save',
+          text: 'Salvar',
           handler: data => {
             let newChecklist = new ChecklistModel(data.name, []);
             this.checklists.push(newChecklist);

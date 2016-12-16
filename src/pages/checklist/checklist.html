@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="secondary">
-    <ion-title>Checklist title</ion-title>
+    <ion-title>{{checklist.title}}</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="uncheckItems()"><ion-icon name="refresh-circle"></ion-icon></button>
         <button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon> </button>
@@ -12,9 +12,10 @@
 
 <ion-content>
     <ion-list no-lines>
-        <ion-item-sliding>
+        <ion-item-sliding *ngFor="let item of checklist.items">
             <ion-item>
-              <ion-label>Item title</ion-label>
+              <ion-label>{{item.title}}</ion-label>
+              <ion-checkbox [checked]="item.checked" (click)="toggleItem(item)"> </ion-checkbox>
             </ion-item>
 
             <ion-item-options>
@@ -44,5 +45,21 @@ Definido na classe para o seu componente: This.myName = "Josh" Se eu fosse usar 
 <qualque coisa [myName] = "myName"> A propriedade myName seria definida como "Josh", porque o meu nome iria ficar avaliada em primeiro lugar neste caso. 
 Continuando, não há nada de mais surpreendente no resto do modelo - simplesmente adicionamos os botões "Editar" e "Excluir" à nossa lista deslizante 
 como fizemos na última página. Se você executar ionic servir agora, você deve ver algo como isto:
+====================
+Isso tudo deve parecer bastante semelhante ao modelo da página inicial, mas existem algumas diferenças. Estamos usando
+Os dados da lista de verificação de nossa classe para exibir o título da lista de verificação atual na barra de navegação. Estamos de novo
+Looping através de dados usando ngFor, mas desta vez estamos apenas looping através dos itens, que são uma criado
+Da lista de verificação. Observe também que, além de renderizar dados usando chaves duplas como esta:
+
+{{título do item}}
+
+Também podemos definir propriedades em elementos usando os colchetes como este:
+
+[Checked] = "item.checked"
+
+Isso irá definir verificado para ser o valor de qualquer item.checked avalia.
+
+
+
 
 -->
