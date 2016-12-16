@@ -1,9 +1,3 @@
-<!--
-  Generated template for the Intro page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -13,6 +7,79 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-slides [options]="slideOptions">
+      
+      <ion-slide>
+          <img src="assets/images/slide1.png" />
+      </ion-slide>
+      
+      <ion-slide>
+          <img src="assets/images/slide2.png" />
+      </ion-slide>
+
+      <ion-slide>
+          <img src="assets/images/slide3.png" />
+      </ion-slide>
+      
+      <ion-slide>
+         <ion-row>
+           <ion-col>
+             <button ion-button color="light" (click)="goToHome()" style="margin-top: 20px;">Comece a usar o Quicklist</button>
+           </ion-col>
+       
+         </ion-row>
+         <ion-row>
+           <ion-col>
+              <img src="assets/images/slide4.png" />
+           </ion-col>
+         </ion-row>
+      </ion-slide>
+  
+  </ion-slides>
 
 </ion-content>
+<!-- 
+Informações sobre o código dessa página, a título de estudos e consultas futuras
+ =============================================================================== 
+Slider Component 
+É bastante comum para aplicações móveis exibir algumas instruções para o usuário 
+através da utilização de um Slides estilo de cartão tutorial. Ionic tem um 
+componente slide incorporado, por isso vamos usar ele, e Para certificar-se 
+de que o usuário não tem que passar pelo tutorial toda vez que 
+estaremos acompanhando se eles Já o viu ou não.
+
+O controle deslizante em si vai ser muito simples, ele nos permitirá exibir uma série de imagens e no último
+de Slide, haverá um botão para começar a usar o aplicativo.Primeiro, vamos 
+construir o componente do controle deslizante e, em seguida, vamos 
+analisar como integrá-lo em Nossa aplicação. Começaremos criando o modelo.
+===========================================================================
+A primeira coisa que você pode notar sobre isso é que ele não contém um navbar, 
+apenas a área de conteúdo.
+
+Não é necessário incluir a barra de navegação em cada página, e não queremos 
+exibi-la aqui. O resto do código é bastante simples, usamos <ion-slides> com 
+uma propriedade options para que possamos configurá-lo com algumas opções na 
+definição de nossa classe em um momento, e usamos <ion-slide> para definir 
+cada um dos Nossos slides.
+
+Assim, no código acima, o usuário verá primeiro um slide contendo a imagem slide1 
+e, quando eles deslizarem, verão slide2 e assim por diante até chegarem ao último 
+slide que contém um botão para ir para a home page.
+
+O último slide é um pouco mais complicado porque estamos fazendo uso de <ion-row> 
+e <ion-col> para que possamos posicionar o botão onde queremos. Essas duas 
+diretivas compõem o grid do Ionic2, onde as linhas ficam colocadas 
+embaixo umas das outras, e as colunas dentro dessas linhas aparecem lado a lado. 
+==================
+Este é um exemplo muito simples porque queremos que o botão apareça acima da imagem, 
+mas você pode Criar layouts bastante complexos, fornecendo uma largura para 
+os cols como este:
+  <Ion-row>
+    <Ion-col width-10> </ ion-col>
+    <Ion-col width-50> </ ion-col>
+  </Ion-row>
+E você pode incluir tanto aninhamento como você gosta.
+
+
+-->
