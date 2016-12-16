@@ -190,8 +190,7 @@ Pressione uma nova página e passe uma referência à lista de verificação cli
 
 
 Passamos na ChecklistPage que importámos antes (que ainda estamos para terminar) 
-ao método push, bem como
-Como os dados que queremos enviar para a nova página, que é uma referência 
+ao método push, bem como os dados que queremos enviar para a nova página, que é uma referência 
 para a lista de verificação que o usuário está tentando
 visualizar. Nós poderemos usar NavParams na classe para nossa página da 
  */

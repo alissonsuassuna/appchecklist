@@ -1,22 +1,45 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
-/*
-  Generated class for the Checklist page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-checklist',
   templateUrl: 'checklist.html'
 })
 export class ChecklistPage {
 
-  constructor(public navCtrl: NavController) {}
+  checklist: any;
 
-  ionViewDidLoad() {
-    console.log('Hello ChecklistPage Page');
+  constructor(public nav: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+
+    this.checklist = this.navParams.get('checklist');
+  }
+
+  addItem(): void{
+
+  }
+
+  toggleItem(item): void{
+
+  }
+
+  renameItem(item): void {
+
+  }
+
+  uncheckItems(): void {
+
   }
 
 }
+/* Comentarios do código a título de estudos e referencias futuras
+=====================================================================
+Tudo que foi escrito aqui já foi explicado nas classes anteriores, menos o NavParams. Quando passamos dados para outra página, 
+podemos pegá-lo injetando o NavParams e usando o método get. Neste exemplo, estamos apenas passando os dados da lista de verificação que queremos ver,
+Mas você também pode passar vários valores, se quiser. Assim como fizemos antes, vamos passar pela implementação dessas funções, uma por uma agora. 
+Muitos destes serão bastante semelhantes ao que acabamos de fazer para a home page.
+
+
+
+
+ */
+

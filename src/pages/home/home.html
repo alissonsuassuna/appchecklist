@@ -16,12 +16,12 @@
 
       <button ion-item (click)="viewChecklist(checklist)" class="home-item">
           {{checklist.title}}
-          <span class="secondary-detail">{{checklist.items.length}} items</span>
+          <span>{{checklist.items.length}} items</span>
       </button>
 
       <ion-item-options>
-        <button ion-button icon-only color="light" (click)="renameChecklist(checklist)"><ion-icon name="clipboard"></ion-icon></button>
-        <button ion-button icon-only color="danger" (click)="removeChecklist(checklist)"><ion-icon name="trash"></ion-icon></button>
+        <button ion-button icon-only color="light" (click)="renameChecklist(checklist)"><ion-icon name="clipboard"></ion-icon>renomear</button>
+        <button ion-button icon-only color="danger" (click)="removeChecklist(checklist)"><ion-icon name="trash"></ion-icon>deletar</button>
       </ion-item-options>
       
     </ion-item-sliding>
@@ -81,4 +81,36 @@ Estamos fazendo algumas coisas interessantes aqui agora, mais notavelmente,
 nós adicionamos um loop ngFor:
 
 <ion-item-sliding *ngFor="let checklist of checklists">
+
+O que isso fará é fazer um loop sobre cada entrada que temos em nosso array this.checklists e mostra cada
+Item para ele na lista. Lembre-se, a sintaxe * usada na frente do ngFor aqui é um atalho para criação
+do loop do angular2, então o que estamos fazendo essencialmente é a criação de um modelo que é "carimbado"
+Ele vai monstrando a cada interação os itens do array, como o famoso forEach. e para mostra os dados fazemos,
+uma interbolação segue o exemplo: 
+
+{{checklist.title}}
+
+Observe que também temos uma infront de lista de verificação no loop ngFor. Em Angular 2 usando let like
+Isso nos permite criar uma variável local, e é isso que nos permite passar uma referência à especificidade
+Lista de verificação em todas as funções que acabamos de criar. Para tornar o conceito mais claro, se usássemos o
+Código seguinte:
+
+<ion-item-sliding *ngFor="let check of checklists">
+
+Então nós renderizamos os dados como este:
+
+{{check.title}}
+
+E passar a referência em nossas funções como esta:
+
+removeChecklist (check)
+
+Isso apenas sobre termina acima nossa página home, e você deve agora poder adicionar, editar e suprimir listas de verificação,
+Bem como iniciar a página de detalhes de uma lista de verificação específica (que não conterá nada ainda, e não
+Realmente trabalho).
+Se você atear fogo ao serviço iônico agora você deve ver algo como isto:
+
+É importante observar que você deve remover esta linha de checklist.html:
+
+<ion-checkbox [checked]="item.checked" (click)="toggleItem(item)"></ion-checkbox>
 -->
