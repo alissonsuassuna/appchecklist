@@ -5,6 +5,8 @@ import { ChecklistPage } from '../checklist/checklist';
 import { ChecklistModel } from '../../models/checklist-model';
 import { Data } from '../../providers/data';
 import { Keyboard } from 'ionic-native';
+import { IntroPage } from '../intro/intro';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -14,30 +16,30 @@ export class HomePage {
 
   checklists: ChecklistModel[] = [];
 
-  constructor(public nav: NavController, public dataService: Data, public alertCtrl: AlertController, public platform: Platform) {
-    
+  constructor(public nav: NavController, public dataService: Data, public alertCtrl: AlertController, public storage: Storage, public platform: Platform) {
+
   }
 
-  ionViewDidLoad(){
-    
+  ionViewDidLoad() {
+
     this.platform.ready().then(() => {
-      
+      this.storage.get('introShown').then((result) => {
+
+        if (!result) {
+          this.storage.set('introShown', true);
+          this.nav.setRoot(IntroPage);
+        }
+      });
       this.dataService.getData().then((checklists) => {
-
         let savedChecklists: any = false;
-
-        if(typeof(checklists) != "undefined"){
+        if (typeof (checklists) != "undefined") {
           savedChecklists = JSON.parse(checklists);
         }
-
-        if(savedChecklists){
-
+        if (savedChecklists) {
           savedChecklists.forEach((savedChecklist) => {
-
-            let loadChecklist = new ChecklistModel(savedChecklist.title, savedChecklist.items);
-
+            let loadChecklist = new ChecklistModel(savedChecklist.title,
+              savedChecklist.items);
             this.checklists.push(loadChecklist);
-
             loadChecklist.checklist.subscribe(update => {
               this.save();
             });
@@ -47,7 +49,8 @@ export class HomePage {
     });
   }
 
- addChecklist(): void {
+
+  addChecklist(): void {
     let prompt = this.alertCtrl.create({
       title: 'Nova lista',
       message: 'Digite o nome da nova lista por favor',
@@ -97,10 +100,10 @@ export class HomePage {
           handler: data => {
             let index = this.checklists.indexOf(checklist);
 
-              if(index > -1){
-                this.checklists[index].setTitle(data.name);
-                this.save();
-              }
+            if (index > -1) {
+              this.checklists[index].setTitle(data.name);
+              this.save();
+            }
           }
         }
       ]
@@ -118,7 +121,7 @@ export class HomePage {
   removeChecklist(checklist): void {
     let index = this.checklists.indexOf(checklist);
 
-    if(index > -1){
+    if (index > -1) {
       this.checklists.splice(index, 1);
       this.save();
     }
@@ -128,7 +131,7 @@ export class HomePage {
 
     Keyboard.close();
     this.dataService.save(this.checklists);
-    
+
   }
 }
 
@@ -258,4 +261,16 @@ As alterações de dados. É importante que façamos tudo isso dentro da chamada
 Executar depois que o dispositivo estiver pronto. Como estamos interagindo com o armazenamento de dispositivos, se tentarmos fazer isso
 Antes que o dispositivo esteja pronto, causará alguns problemas.
 =====================================
+
+função ionViewDidLoad (novas funcionalidades)
+
+Estamos importando e fazendo uso do serviço de armazenamento novamente agora. Vamos usar isso para armazenar uma bandeira
+Que nos dirá se o tutorial já foi visto ou não.
+verificamos a existência de um flag introShown. Se não existir
+Em seguida, alternar para a nossa intro tutorial página e, em seguida, definir essa bandeira para ser verdade para não mostra da próxima vez.
+
+NOTA: Para fins de teste, se você deseja limpar este sinalizador, você precisará excluir o banco de dados WebSQL que
+É criado no seu navegador. No Chrome, você pode fazer isso indo para chrome: // settings / cookies,
+Procurando localhost e, em seguida, excluindo _ionicstorage. Isto suprimirá naturalmente todos os dados que são
+Armazenado no banco de dados do WebSQL, e não apenas o sinalizador introShown.
  */

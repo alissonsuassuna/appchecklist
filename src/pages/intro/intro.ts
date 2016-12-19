@@ -25,8 +25,8 @@ export class IntroPage {
 }
 
 /*
-Não é esta a classe mais simples que você já viu até agora? Tudo o que faz é 
-importar a página inicial, definir a opção pager para o nosso controle deslizante 
+Não é a classe mais simples que você já viu até agora? Tudo o que é feito aqui é uma 
+importação da HomePage, definir a opção pager para o nosso controle deslizante 
 e alterar a página raiz para ele usando o NavController quando a função 
 goToHome é chamada.
  
