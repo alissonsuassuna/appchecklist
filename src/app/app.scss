@@ -14,3 +14,22 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-content {
+    background-color: #32db64 !important;
+    }
+    
+    .logo {
+        max-height: 39px;
+    }
+
+    button {
+        border: none !important;
+    }
+
+    /*
+    
+Mais uma vez, apenas alguns ajustes menores aqui. Agora vamos adicionar os estilos que serão aplicados em todo o
+Toda a aplicação:
+
+    */
